@@ -9,6 +9,8 @@ class GroupUser extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     // Many Group Users can belong to one single User.
     public function user()
     {
@@ -16,13 +18,13 @@ class GroupUser extends Model
     }
 
     // Many Group Users can belong to one single Group.
-    public function group()
-    {
-        return $this->belongsTo(Group::class);
-    }
+    // public function group()
+    // {
+    //     return $this->hasMany(Group::class);
+    // }
 
     // One Group User can have Many Group Users Data.
-    public function group_user_data()
+    public function group_user_datas()
     {
         return $this->hasMany(GroupUserData::class);
     }

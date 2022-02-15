@@ -79,8 +79,8 @@ class GroupType extends Model
     }
 
     // One Group Type can have Many Group User Data.
-    public function group_user_data()
-    {
-        return $this->hasMany(GroupUserData::class);
-    }
+    // public function group_user_data()
+    // {
+    //     return $this->hasMany(GroupUserData::class);
+    // }
 }

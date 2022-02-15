@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use App\Models\GroupType;
+use App\Models\GroupUser;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -146,8 +147,8 @@ class GroupController extends Controller
     public function dataIndex()
     {
         return view('data.index', [
-            'allGroups' => Group::orderBy('name')->with('group_type')->get(),
-            'allTypes'  => GroupType::with('group_data')->where('group_id', request('group'))->get()
+            'allGroups' => Group::orderBy('name')->with('group_types')->get(),
+            'allTypes'  => GroupType::where('group_id', request('group'))->get(),
             // 'allData'   => GroupData::with('group_type')
             //     ->whereHas('group_type', function ($query) {
             //         return $query
@@ -158,7 +159,12 @@ class GroupController extends Controller
 
     public function dataStore()
     {
-        dd(request()->all());
+        // dd(request()->all());
+
+        GroupUser::create([
+            'user_id' => 1,
+            'group_id' => request()->input('selected_group')
+        ]);
     }
 
     #endregion

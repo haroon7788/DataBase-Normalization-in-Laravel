@@ -59,14 +59,16 @@ class Group extends Model
     }
 
     // One Group can have many Group Types.
-    public function group_type()
+    public function group_types()
     {
         return $this->hasMany(GroupType::class);
     }
 
-    // One Group can have Many Users.
-    public function group_user()
-    {
-        return $this->hasMany(GroupUser::class);
-    }
+    // TODO: "group user to user_gruop";
+    // One User can have Many Groups.
+    // public function group_user()
+    // {
+    //     return $this->belongsTo(GroupUser::class);
+    // }
 }
+

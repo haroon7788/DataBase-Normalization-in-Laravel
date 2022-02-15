@@ -9,11 +9,11 @@ class GroupUserData extends Model
 {
     use HasFactory;
 
-    // Many Users Data can belong to One Group Types.
-    public function group_type()
-    {
-        return $this->belongsTo(GroupType::class);
-    }
+    // Many Users Data can belong to One Group Type.
+    // public function group_type()
+    // {
+    //     return $this->belongsTo(GroupType::class);
+    // }
 
     // Many Users Data can belong to one Group User.
     public function group_user()

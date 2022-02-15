@@ -147,7 +147,7 @@ class GroupController extends Controller
     {
         return view('data.index', [
             'allGroups' => Group::orderBy('name')->with('group_type')->get(),
-            'allTypes'  => GroupType::with('group_user_data')->where('group_id', request('group'))->get()
+            'allTypes'  => GroupType::with('group_data')->where('group_id', request('group'))->get()
             // 'allData'   => GroupData::with('group_type')
             //     ->whereHas('group_type', function ($query) {
             //         return $query

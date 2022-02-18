@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Models\GroupType;
 use App\Models\GroupUser;
+use App\Models\GroupUserData;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -159,12 +161,47 @@ class GroupController extends Controller
 
     public function dataStore()
     {
-        // dd(request()->all());
-
-        GroupUser::create([
-            'user_id' => 1,
-            'group_id' => request()->input('selected_group')
+        $groupUser = GroupUser::create([
+            'user_id'  => 1,
+            'group_id' => request()->input('group_id'),
         ]);
+
+        // $groupTypes = GroupType::with('group')->whereHas('group', function ($query) {
+        //     return $query->where('id', request()->input('group_id'));
+        // })->get();
+
+        $group = Group::find(request()->input('group_id'));
+
+        foreach ($group->group_types as $type) {
+            $row = new GroupUserData();
+            $row->group_user_id = $groupUser->id;
+            $row->group_type_id = $type->id;
+            $row->value = request()->input($type->id);
+            $row->save();
+        }
+
+        return redirect()->back();
+    }
+
+    public function showData()
+    {
+        $users = User::all();
+        $groups = Group::all();
+        return view('data.show', [
+            'groupUserDatas' => GroupUserData::with('group_user')->where('group_user_id', 1)->get(),
+            'groupUsers' => GroupUser::all(),
+            'users' => $users,
+            'groups' => $groups
+        ]);
+
+        // foreach ($courseVideos as $video) {
+        //     if ($video->is_active) {
+        //         $orderDetail = new OrderDetail();
+        //         $orderDetail->video_id = $video->id;
+        //         $orderDetail->order()->associate($this->orderId);
+        //         $orderDetail->save();
+        //     }
+        // }
     }
 
     #endregion

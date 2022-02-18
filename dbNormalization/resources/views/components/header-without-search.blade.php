@@ -34,6 +34,11 @@
                     Group Data
                 </a>
             </li>
+            <li class="nav-item @if (request()->routeIs('groups.data.show')) active @endif">
+                <a class="nav-link" href="{{ route('groups.data.show') }}">
+                    Show Data
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

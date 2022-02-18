@@ -48,3 +48,5 @@ Route::get('group/type/delete/{type:id}', [GroupController::class, 'typeDestroy'
 // Group Data Route
 Route::get('groups/data', [GroupController::class, 'dataIndex'])->name('groups.data');
 Route::put('groups/data', [GroupController::class, 'dataStore'])->name('group.data.store');
+
+Route::get('groups/data/show', [GroupController::class, 'showData'])->name('groups.data.show');

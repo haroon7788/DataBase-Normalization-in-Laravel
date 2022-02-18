@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Group;
-use App\Models\GroupData;
 use App\Models\GroupType;
+use App\Models\GroupUser;
+use App\Models\GroupUserData;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -39,6 +41,7 @@ class DatabaseSeeder extends Seeder
         // Group::create([
         //     'name' => 'Sports Group'
         // ]);
+
 
         // Groups Types
         GroupType::create([
@@ -86,5 +89,54 @@ class DatabaseSeeder extends Seeder
             'name'     => 'Projects'
         ]);
 
+
+        // Group Users
+        GroupUser::create([
+            'user_id'  => 2,
+            'group_id' => 2
+        ]);
+        GroupUser::create([
+            'user_id'  => 2,
+            'group_id' => 3
+        ]);
+        GroupUser::create([
+            'user_id'  => 1,
+            'group_id' => 1
+        ]);
+        GroupUser::create([
+            'user_id'  => 1,
+            'group_id' => 4
+        ]);
+
+
+        // Group Users Data
+        GroupUserData::create([
+            'group_user_id' => 1,
+            'group_type_id' => 4,
+            'value'         => 'Haroon Mughal'
+        ]);
+        GroupUserData::create([
+            'group_user_id' => 1,
+            'group_type_id' => 5,
+            'value'         => 'Male'
+        ]);
+        GroupUserData::create([
+            'group_user_id' => 1,
+            'group_type_id' => 6,
+            'value'         => 'BSCS'
+        ]);
+
+
+        // Users
+        User::create([
+            'name'     => 'Haroon',
+            'email'    => 'haroon@gmail.com',
+            'password' => 'admin'
+        ]);
+        User::create([
+            'name'     => 'ZeeBoy',
+            'email'    => 'zeeboy@gmail.com',
+            'password' => 'admin'
+        ]);
     }
 }

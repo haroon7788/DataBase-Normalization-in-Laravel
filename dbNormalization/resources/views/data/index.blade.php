@@ -29,8 +29,8 @@
             <div class="form-group">
                 @forelse ($allTypes as $type)
                     <label class="mt-4">{{ $type->name }}:</label>
-                    <input type="text" class="form-control" name="{{ $type->name }}">
-                    <input type="hidden" name="selected_group" value="{{ request('group') }}">
+                    <input type="text" class="form-control" name="{{ $type->id }}">
+                    <input type="hidden" name="group_id" value="{{ request('group') }}">
                 @empty
                     <h3 class="bg-danger text-center text-light py-5 m-3">This Group Yet Has Nothing To Fill In.</h3>
                 @endforelse

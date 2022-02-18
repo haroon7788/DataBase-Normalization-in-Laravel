@@ -12,14 +12,17 @@
                         <thead class="bg-blue-100">
                             <tr>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-s font-medium text-black font-bold uppercase tracking-wider">
                                     id</th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    user_id</th>
+                                    class="px-6 py-3 text-left text-s font-medium text-black font-bold uppercase tracking-wider">
+                                    User</th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    group_id</th>
+                                    class="px-6 py-3 text-left text-s font-medium text-black font-bold uppercase tracking-wider">
+                                    Group</th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-s font-medium text-black font-bold uppercase tracking-wider">
+                                    Data</th>
                             </tr>
                         </thead>
 
@@ -27,25 +30,34 @@
                             @foreach ($groupUsers as $groupUser)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-10 w-10">
-                                                <img class="h-10 w-10 rounded-full"
-                                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                                                    alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">Jane Cooper</div>
-                                                <div class="text-sm text-gray-500">{{ $users->where('id', $groupUser->user_id)->pluck('name')->first() }}</div>
-                                            </div>
+                                        <div class="text-sm font-bold text-black">{{ $groupUser->id }}</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-700">
+                                            {{ $users->where('id', $groupUser->user_id)->pluck('name')->first() }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">Regional Paradigm Technician</div>
-                                        <div class="text-sm text-gray-500">{{ $groupUser->user_id }}</div>
+                                        <div class="text-sm font-medium text-gray-700">
+                                            {{ optional($groups->find($groupUser->group_id))->name }}
+                                            {{-- optional() is not required here as $group will find foreign key based record, which always exists. --}}
+                                            {{-- Or we can use where() instead of find() --}}
+                                        </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">Regional Paradigm Technician</div>
-                                        <div class="text-sm text-gray-500">{{ $groups->where('id', $groupUser->group_id)->pluck('name')->first() }}</div>
+                                        @forelse ($groupUser->group_user_data as $data)
+                                            <div class="text-sm font-medium text-gray-700">
+                                                {{-- {{ $groups->find($groupUser->group_id)->group_types()->pluck('name') }}: --}}
+                                                <span class="font-bold text-black">
+                                                    {{ optional($groupTypes->find($data->group_type_id))->name }} :
+                                                </span>
+                                                {{ $data->value }}
+                                            </div>
+                                        @empty
+                                            <div class="text-sm font-medium text-red-600">
+                                                No Record Entered.
+                                            </div>
+                                        @endforelse
                                     </td>
                                 </tr>
                             @endforeach

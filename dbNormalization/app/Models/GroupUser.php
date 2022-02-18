@@ -17,14 +17,8 @@ class GroupUser extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Many Group Users can belong to one single Group.
-    // public function group()
-    // {
-    //     return $this->hasMany(Group::class);
-    // }
-
     // One Group User can have Many Group Users Data.
-    public function group_user_datas()
+    public function group_user_data()
     {
         return $this->hasMany(GroupUserData::class);
     }

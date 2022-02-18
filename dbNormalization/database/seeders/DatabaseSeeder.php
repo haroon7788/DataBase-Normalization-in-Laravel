@@ -90,22 +90,31 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        // Users
+        User::create([
+            'name'     => 'ZeeBoy',
+            'email'    => 'zeeboy@gmail.com',
+            'password' => 'admin'
+        ]);
+        User::create([
+            'name'     => 'Haroon',
+            'email'    => 'haroon@gmail.com',
+            'password' => 'admin'
+        ]);
+
+
         // Group Users
         GroupUser::create([
             'user_id'  => 2,
             'group_id' => 2
         ]);
         GroupUser::create([
-            'user_id'  => 2,
+            'user_id'  => 1,
             'group_id' => 3
         ]);
         GroupUser::create([
-            'user_id'  => 1,
+            'user_id'  => 2,
             'group_id' => 1
-        ]);
-        GroupUser::create([
-            'user_id'  => 1,
-            'group_id' => 4
         ]);
 
 
@@ -125,18 +134,20 @@ class DatabaseSeeder extends Seeder
             'group_type_id' => 6,
             'value'         => 'BSCS'
         ]);
-
-
-        // Users
-        User::create([
-            'name'     => 'Haroon',
-            'email'    => 'haroon@gmail.com',
-            'password' => 'admin'
+        GroupUserData::create([
+            'group_user_id' => 2,
+            'group_type_id' => 7,
+            'value'         => 'ZeeBoy'
         ]);
-        User::create([
-            'name'     => 'ZeeBoy',
-            'email'    => 'zeeboy@gmail.com',
-            'password' => 'admin'
+        GroupUserData::create([
+            'group_user_id' => 2,
+            'group_type_id' => 8,
+            'value'         => 'Tekken 7'
+        ]);
+        GroupUserData::create([
+            'group_user_id' => 2,
+            'group_type_id' => 9,
+            'value'         => 'Expert'
         ]);
     }
 }

@@ -150,12 +150,7 @@ class GroupController extends Controller
     {
         return view('data.index', [
             'allGroups' => Group::orderBy('name')->with('group_types')->get(),
-            'allTypes'  => GroupType::where('group_id', request('group'))->get(),
-            // 'allData'   => GroupData::with('group_type')
-            //     ->whereHas('group_type', function ($query) {
-            //         return $query
-            //             ->where('group_id', request('group'));
-            //     })->get(),
+            'allTypes'  => GroupType::where('group_id', request('group'))->get()
         ]);
     }
 
@@ -165,10 +160,6 @@ class GroupController extends Controller
             'user_id'  => 1,
             'group_id' => request()->input('group_id'),
         ]);
-
-        // $groupTypes = GroupType::with('group')->whereHas('group', function ($query) {
-        //     return $query->where('id', request()->input('group_id'));
-        // })->get();
 
         $group = Group::find(request()->input('group_id'));
 
@@ -185,23 +176,12 @@ class GroupController extends Controller
 
     public function showData()
     {
-        $users = User::all();
-        $groups = Group::all();
         return view('data.show', [
-            'groupUserDatas' => GroupUserData::with('group_user')->where('group_user_id', 1)->get(),
-            'groupUsers' => GroupUser::all(),
-            'users' => $users,
-            'groups' => $groups
+            'groupUsers'    => GroupUser::with('group_user_data')->get(),
+            'users'         => User::all(),
+            'groups'        => Group::all(),
+            'groupTypes'    => GroupType::all()
         ]);
-
-        // foreach ($courseVideos as $video) {
-        //     if ($video->is_active) {
-        //         $orderDetail = new OrderDetail();
-        //         $orderDetail->video_id = $video->id;
-        //         $orderDetail->order()->associate($this->orderId);
-        //         $orderDetail->save();
-        //     }
-        // }
     }
 
     #endregion

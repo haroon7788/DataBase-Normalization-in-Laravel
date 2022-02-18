@@ -64,7 +64,6 @@ class Group extends Model
         return $this->hasMany(GroupType::class);
     }
 
-    // TODO: "group user to user_gruop";
     // One User can have Many Groups.
     // public function group_user()
     // {
